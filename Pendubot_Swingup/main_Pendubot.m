@@ -1,5 +1,5 @@
 clear; close all; clc;
-addpath(genpath('/MATLAB Drive/Robotics/2_Link_Complex_Bots/OptimTraj-master/OptimTraj'));
+addpath(genpath('/OptimTraj-master/OptimTraj'));
 
 %% ========== PART A: TRAJECTORY OPTIMIZATION ==========
 fprintf('========== PART A: Trajectory Optimization ==========\n');
@@ -136,3 +136,4 @@ fprintf('Improvement: %.1fx better\n', error_ol_final/error_cl_final);
 plotClosedLoopComparison(t_opt, x_opt, t_ode, x_ode, t_cl, x_cl);
 % Animate closed-loop response
 animatePendubot(t_cl, x_cl', 'Closed-Loop LQR Control (with perturbation)');
+
