@@ -1,7 +1,7 @@
 # Mountain_Car_TO_LQR
 
 This project implements the tracking controller using a TO to get an optimal path followed by a simplified version of time-varying LQR. The code or animation is included in this implementation. As such, the code is 
-heavily commented for understanding, but for details of the implememntation go through the report -- [class_report.pdf](). 
+heavily commented for understanding, but for details of the implememntation go through the report -- [class_report.pdf](https://github.com/Jash-2000/Adv_Control_Systems/blob/main/Mountain_Car/Report_Mountain_Car.pdf). 
 
  - To run this animated demo, simply download this file, extract the contents of the folder "OptimTraj-master" in the current path.
  - To enable plotting, set **en_plot** to 1.
