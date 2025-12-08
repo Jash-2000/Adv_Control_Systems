@@ -1,5 +1,5 @@
 clear; close all; clc;
-addpath(genpath('/OptimTraj-master/OptimTraj'));
+addpath(genpath('/MATLAB Drive/Robotics/2_Link_Complex_Bots/OptimTraj-master/OptimTraj'));
 
 %% ========== PART A: TRAJECTORY OPTIMIZATION ==========
 fprintf('========== PART A: Trajectory Optimization ==========\n');
@@ -16,9 +16,9 @@ q_start = [theta1_start; theta2_start; 0; 0];
 q_goal = [theta1_goal; theta2_goal; 0; 0];
 
 % Control and time limits
-u_max = 10.0;      % Maximum torque (N-m)
+u_max = 15.0;      % Maximum torque (N-m)
 T_max = 20.0;       % Maximum time (s)
-N = 50;            % Number of grid points
+N = 60;            % Number of grid points
 
 % Create trajectory optimization problem
 problem.func.dynamics = @(t, x, u) pendubotDynamics(t, x, u);
@@ -36,8 +36,8 @@ problem.bounds.finalState.low = q_goal;
 problem.bounds.finalState.upp = q_goal;
 
 % State bounds
-problem.bounds.state.low = [-2*pi; -2*pi; -10; -10];
-problem.bounds.state.upp = [2*pi; 2*pi; 10; 10];
+problem.bounds.state.low = [-pi; -pi; -10; -10];
+problem.bounds.state.upp = [pi; pi; 10; 10];
 
 % Control bounds
 problem.bounds.control.low = -u_max;
