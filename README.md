@@ -18,6 +18,7 @@ The motivation on using multiple techniques as to understand the fundamental dif
 | **PID/LQR**     | ✔ Yes               | ❌ No      | Closed-form formula                     |
 | **MPC**         | ✔ Yes               | ✔ Yes     | Repeated online trajectory optimization |
 
+---
 
 A Kalman State Update Equation with Controller Law being u = -Hx becomes x^+=Ax^+Bu+Kf​(z−Hx^). Here, z is the system output and x^ is the estimation of the internal state "x", which can not be measured.
 This is an interesting equation where **Ax^** corresponds to the dynamics, **Bu** corresponds to the feedforward input and **Kf​(z−Hx^)** corresponds to the feedback where z is supposed to follow u=-Hx
@@ -30,3 +31,11 @@ Given the importance of Kalman based estimators, its difference from a classical
 | Uncertainty tracking | No covariance                   | Tracks covariance (P)                   |
 | Output               | Single “best guess”             | Best guess + uncertainty                |
 | Use case             | Clean models, little noise      | Real-world noisy systems                |
+
+---
+
+A feedback controller is generally required to study even in case of simulation because of how the optimizations are performed. Even if you follow the optimized trajectory perfectly:
+- Interpolation errors: u_ref and x_ref are usually interpolated from discrete points.These Linear interpolation introduces small deviations between collocation points.
+- Feedback control differences: In trajectory optimization, you might design a time-varying LQR. If the system deviates slightly, the feedback acts on this error, creating small differences in the trajectory.
+- Nonlinearities and solver tolerances: The optimization might use a simplified or linearized model. Real Systems follow the full nonlinear dynamics, so small differences accumulate over time.
+- Discrete vs continuous enforcement: Trajectory optimization enforces dynamics only at discrete points, not between them. Solvers like ode45 fills in the gaps, revealing deviations that weren’t penalized in optimization.
