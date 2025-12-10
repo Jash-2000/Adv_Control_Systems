@@ -2,12 +2,8 @@ To run the main simulation, first download the [Trajectory Optimization Toolbox]
 
 ---
 
-<p align="center">
-  <video src="https://youtu.be/JRdRqE5JGyg"></video>
-</p>
+[![Watch the video](https://i.sstatic.net/Vp2cE.png)](https://youtu.be/JRdRqE5JGyg)
 
 ---
 
-<p align="center">
-  <video src="https://github.com/Jash-2000/Adv_Control_Systems/blob/main/Pick_And_Throw_Robot/Kalman_Filtering.mp4"></video>
-</p>
+[![Watch the video](https://i.sstatic.net/Vp2cE.png)](https://github.com/Jash-2000/Adv_Control_Systems/blob/main/Pick_And_Throw_Robot/Kalman_Filtering.mp4)
