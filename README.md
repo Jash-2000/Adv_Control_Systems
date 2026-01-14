@@ -1,14 +1,42 @@
 # Adv_Control_Systems
 Projects contained in this repository and the key technology used in it. For more information, checkout the [Resources](https://github.com/Jash-2000/Adv_Control_Systems/tree/main/Resources) folder in this repository:
 
-1. Pick and Throw Robot -- A major project that involves multiple phases to simulate a robot that can pick up an arbitary object and generate motion to toss it to a target spot.
-2. Dual Pendulum Control -- Uses a LQG(Linear Quadratic Guassian) Controller to stabilize the system 
-3. Acrobot Swingup -- Uses **Partial Feedback Linearization** for swing-up of the system, and then stabilizing near the fully-upright equilibrium via an **LQR (linear quadratic regulator)** balancing control.
-4. Mountain Car -- Uses **Tracking controllter** that plans the min fuel path using Trajectory Optimization and implements the feedback with LQR.
-5. Pendubot Swingup -- Uses **Trajectory Optimization** for swingup trajectory with minimum joint efforts.
-6. Acrobot Controller -- Use a feedback controller that uses TO inside **MPC(Model Predictive Controller)** to move the acrobot from one equilibrium to another equilibrium.
-7. Cart Pendulum State Estimation and Control -- Uses **Kalman Filter** to estimate the states and apply LQR controller to stabilize the self-balancing cart.
-8. Segway Hybrid Control -- Used a **hybrid(cont.+ disc. time) controller** to self-balance and move a segway system.
+1. Pick and Throw Robot -- A major project that simulation, dynamics, perception, and control pipeline for a 3-link planar robotic arm capable of picking arbitrary objects and throwing them accurately to a target location.
+2.Segway Hybrid Control -- Used a **hybrid(cont.+ disc. time) controller** to self-balance and move a segway system.
+3. Dual Pendulum Control -- Uses a LQG(Linear Quadratic Guassian) Controller to stabilize the system 
+4. Acrobot Swingup -- Uses **Partial Feedback Linearization** for swing-up of the system, and then stabilizing near the fully-upright equilibrium via an **LQR (linear quadratic regulator)** balancing control.
+5. Mountain Car -- Uses **Tracking controllter** that plans the min fuel path using Trajectory Optimization and implements the feedback with LQR.
+6. Pendubot Swingup -- Uses **Trajectory Optimization** for swingup trajectory with minimum joint efforts.
+7. Acrobot Controller -- Use a feedback controller that uses TO inside **MPC(Model Predictive Controller)** to move the acrobot from one equilibrium to another equilibrium.
+8. Cart Pendulum State Estimation and Control -- Uses **Kalman Filter** to estimate the states and apply LQR controller to stabilize the self-balancing cart.
+   
+---
+**Perception Module**
+
+The perception module provides task-aware, open-vocabulary object localization by fusing vision-language reasoning with language-conditioned detection. This enables the robot to identify and localize arbitrary objects specified through natural language instructions. The system integrates:
+  - **Jina-VLM** for high-level task and object understanding
+  - **Grounding DINO** for precise spatial localization
+
+Given an RGB image and a task description, Jina-VLM extracts the semantic intent of the task and generates an object-level query. This query conditions Grounding DINO to produce an accurate bounding box for the target object, which is then forwarded to the manipulation stack.
+
+**Vision–Language Fusion**
+```mermaid
+graph LR
+    A[Task Instruction] --> B[Jina-VLM]
+    C[RGB Image] --> D[Grounding DINO]
+    B -->|Semantic Query| D
+    D --> E[Target Bounding Box]
+```
+
+**Output to Control Stack**
+The perception output consists of a task-consistent bounding box and object centroid, which are transformed into world coordinates and used by the grasp planner, state estimator, and trajectory optimizer.
+```mermaid
+flowchart LR
+    A[Bounding Box] --> B[3D Localization]
+    B --> C[Grasp Planning]
+    C --> D[Motion & Control]
+
+```
 
 ---
 
